@@ -15,25 +15,28 @@ jobs:
       with:
         workdir: "/tmp/tracee"
 
-    - name: Check if tracee was succesfully started
-      run: |
-        sleep 30
-        docker images -a
-        docker ps -a
-        docker logs tracee-profiler | head
-        echo $?
+#    - name: Check if tracee was succesfully started
+#      run: |
+#        sleep 30
+#        docker images -a
+#        docker ps -a
+#        docker logs tracee-profiler | head
+#        echo $?
 
     - name: Simulate work
-      run: for i in {1..5}; do sleep 2 && strace ls; done
+      run: for i in {1..20}; do sleep 2 && strace ls; done
 
     - name: Stop Tracee profiling
       uses: simar7/tracee-action-stop@main
 
-    - name: Check if tracee was successfully stopped
-      run: |
-        docker ps -a
-        pwd
-        ls -lrth /tmp
-        ls -lrth $(pwd)
-        ls -lrRth /tmp/tracee
-        cat /tmp/tracee/out/tracee.profile
+    - name: Show Tracee profile
+      run: cat /tmp/tracee/out/tracee.profile
+
+#    - name: Check if tracee was successfully stopped
+#      run: |
+#        docker ps -a
+#        pwd
+#        ls -lrth /tmp
+#        ls -lrth $(pwd)
+#        ls -lrRth /tmp/tracee
+#        cat /tmp/tracee/out/tracee.profile
