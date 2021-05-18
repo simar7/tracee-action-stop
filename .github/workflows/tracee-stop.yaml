@@ -12,6 +12,8 @@ jobs:
     steps:
     - name: Start Tracee profiling in background
       uses: simar7/tracee-action-start@main
+      with:
+        workdir: "/tmp/tracee"
 
     - name: Check if tracee was succesfully started
       run: |
@@ -30,4 +32,4 @@ jobs:
         pwd
         ls -lrth /tmp
         ls -lrth $(pwd)
-        ls -lrth /home/runner/work/tracee-action-start/tracee-action-start
+        ls -lrRth /tmp/tracee
