@@ -33,3 +33,4 @@ jobs:
         ls -lrth /tmp
         ls -lrth $(pwd)
         ls -lrRth /tmp/tracee
+        cat /tmp/tracee/out/tracee.profile
