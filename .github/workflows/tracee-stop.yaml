@@ -30,3 +30,4 @@ jobs:
         pwd
         ls -lrth /tmp
         ls -lrth $(pwd)
+        ls -lrth /home/runner/work/tracee-action-start/tracee-action-start
