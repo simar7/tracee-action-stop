@@ -23,6 +23,9 @@ jobs:
         docker logs tracee-profiler | head
         echo $?
 
+    - name: Simulate work
+      run: for i in {1..5}; do sleep 2 && strace ls; done
+
     - name: Stop Tracee profiling
       uses: simar7/tracee-action-stop@main
 
