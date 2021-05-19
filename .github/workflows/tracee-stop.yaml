@@ -44,15 +44,6 @@ jobs:
     #        cat /tmp/tracee/out/tracee.profile
 
     - name: Compare and create a PR
-      run: |
-        cp /tmp/tracee/out/tracee.profile .
-        git config --global user.email "opensource@aquasec.com"
-        git config --global user.name "Tracee Bot"
-        git checkout -B 'tracee-profile-update'
-        git add tracee.profile
-        git commit -m 'update tracee.profile'
-        git push -f --set-upstream origin tracee-profile-update
-        gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}'
-        compareURL='${{ github.event.compare }}'
-        bodyMessage="Changes introduced with changes:${compareURL} Powered by Tracee action"
-        gh pr create --title "Updates to tracee.profile" --body "${bodyMessage}"
+      uses: simar7/tracee-action-create-pr@main
+      with:
+        workdir: "/tmp/tracee"
