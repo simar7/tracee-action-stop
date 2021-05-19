@@ -47,3 +47,4 @@ jobs:
       uses: simar7/tracee-action-create-pr@main
       with:
         workdir: "/tmp/tracee"
+        github-auth-token: ${{ secrets.GITHUB_TOKEN }}
