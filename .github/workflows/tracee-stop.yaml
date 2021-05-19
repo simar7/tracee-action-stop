@@ -48,7 +48,7 @@ jobs:
         cp /tmp/tracee/out/tracee.profile .
         git config --global user.email "opensource@aquasec.com"
         git config --global user.name "Tracee Bot"
-        git checkout -b 'tracee-profile-update'
+        git checkout -B 'tracee-profile-update'
         git add tracee.profile
         git commit -m 'update tracee.profile'
         git push --set-upstream origin tracee-profile-update
