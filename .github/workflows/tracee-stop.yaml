@@ -43,31 +43,6 @@ jobs:
     #        ls -lrRth /tmp/tracee
     #        cat /tmp/tracee/out/tracee.profile
 
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJSON(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: Dump job context
-      env:
-        JOB_CONTEXT: ${{ toJSON(job) }}
-      run: echo "$JOB_CONTEXT"
-    - name: Dump steps context
-      env:
-        STEPS_CONTEXT: ${{ toJSON(steps) }}
-      run: echo "$STEPS_CONTEXT"
-    - name: Dump runner context
-      env:
-        RUNNER_CONTEXT: ${{ toJSON(runner) }}
-      run: echo "$RUNNER_CONTEXT"
-    - name: Dump strategy context
-      env:
-        STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-      run: echo "$STRATEGY_CONTEXT"
-    - name: Dump matrix context
-      env:
-        MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-      run: echo "$MATRIX_CONTEXT"
-
     - name: Compare and create a PR
       run: |
         cp /tmp/tracee/out/tracee.profile .
@@ -79,5 +54,5 @@ jobs:
         git push -f --set-upstream origin tracee-profile-update
         gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}'
         compareURL='${{ github.event.compare }}'
-        bodyMessage="Changes introduced with changes:${compareURL} \n Powered by Tracee action"
+        bodyMessage="Changes introduced with changes:${compareURL} Powered by Tracee action"
         gh pr create --title "Updates to tracee.profile" --body "${bodyMessage}"
