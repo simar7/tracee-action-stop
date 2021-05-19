@@ -78,5 +78,6 @@ jobs:
         git commit -m 'update tracee.profile'
         git push -f --set-upstream origin tracee-profile-update
         gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}'
-        run_id='${{ github.run_id }}'
-        gh pr create --title "Updates to tracee.profile" --body "Changes introduced in PR:${run_id} Powered by Tracee action"
+        compareURL='${{ github.event.compare }}'
+        bodyMessage="Changes introduced with changes:${compareURL} \n Powered by Tracee action"
+        gh pr create --title "Updates to tracee.profile" --body "${bodyMessage}"
