@@ -53,4 +53,5 @@ jobs:
         git commit -m 'update tracee.profile'
         git push -f --set-upstream origin tracee-profile-update
         gh auth login --with-token <<<'${{ secrets.GITHUB_TOKEN }}'
-        gh pr create --title "Updates to tracee.profile" --body "Changes introduced in PR:{{ github.event.pull_request.url }} \n Powered by Tracee action"
+        prURL='${{ github.event.pull_request.url }}'
+        gh pr create --title "Updates to tracee.profile" --body "Changes introduced in PR:${prURL} Powered by Tracee action"
