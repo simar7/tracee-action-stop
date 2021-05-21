@@ -17,6 +17,9 @@ jobs:
       with:
         workdir: "/tmp/tracee"
 
+    - name: Show pstree
+      run: pstree -s -p -h -n
+
     #    - name: Check if tracee was successfully started
     #      run: |
     #        sleep 30
@@ -28,8 +31,14 @@ jobs:
     - name: Simulate work
       run: for i in {1..20}; do sleep 2 && strace ls; done
 
+    - name: Show pstree
+      run: pstree -s -p -h -n
+
     - name: Stop Tracee profiling
       uses: simar7/tracee-action-stop@main
+
+    - name: Show pstree
+      run: pstree -s -p -h -n
 
     - name: Show Tracee profile
       run: cat /tmp/tracee/out/tracee.profile
@@ -43,8 +52,8 @@ jobs:
     #        ls -lrRth /tmp/tracee
     #        cat /tmp/tracee/out/tracee.profile
 
-    - name: Compare and create a PR
-      uses: simar7/tracee-action-create-pr@main
-      with:
-        workdir: "/tmp/tracee"
-        github-auth-token: ${{ secrets.GITHUB_TOKEN }}
+#    - name: Compare and create a PR
+#      uses: simar7/tracee-action-create-pr@main
+#      with:
+#        workdir: "/tmp/tracee"
+#        github-auth-token: ${{ secrets.GITHUB_TOKEN }}
